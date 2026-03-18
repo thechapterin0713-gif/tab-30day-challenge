@@ -1,0 +1,7 @@
+screenshot*
+chainzoku*
+serve.mjs
+screenshot.mjs
+.env
+.env.local
+node_modules/

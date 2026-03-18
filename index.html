@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>콘텐츠 구조부터 첫 런칭까지, 30일이면 충분합니다 | TAB</title>
+  <meta name="description" content="뭐부터 시작해야 할지 모르겠는 1인 창업가를 위한 체계적인 실행 로드맵. 매일 한 스텝만 따라오세요.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              950: '#0E0E1A',
+              900: '#1C1C2E',
+              800: '#2D3048',
+              700: '#3D4058',
+              600: '#4D5068',
+              500: '#6B6E82',
+              400: '#8E91A4',
+              300: '#B1B3C2',
+              200: '#D4D5DF',
+              100: '#EEEEF3',
+              50: '#F7F7FA',
+            },
+            accent: {
+              700: '#C03840',
+              600: '#D04049',
+              500: '#E8515B',
+              400: '#FF6B74',
+              300: '#FF8F96',
+              200: '#FFB3B8',
+              100: '#FFD9DC',
+              50: '#FFF0F1',
+            },
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            heading: ['"Montserrat"', '"Pretendard"', 'sans-serif'],
+            body: ['"Pretendard"', '-apple-system', 'sans-serif'],
+          },
+          boxShadow: {
+            'brand': '0 4px 14px 0 rgba(28, 28, 46, 0.12)',
+            'brand-lg': '0 10px 40px -4px rgba(28, 28, 46, 0.18)',
+            'accent': '0 4px 14px 0 rgba(232, 81, 91, 0.25)',
+            'accent-lg': '0 10px 30px -4px rgba(232, 81, 91, 0.35)',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Pretendard', -apple-system, sans-serif; }
+
+    /* CTA Button */
+    .btn-cta {
+      background: #E8515B;
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-cta:hover {
+      background: #D04049;
+      transform: scale(1.03);
+      box-shadow: 0 10px 30px -4px rgba(232, 81, 91, 0.4);
+    }
+    .btn-cta:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 81, 91, 0.4);
+    }
+    .btn-cta:active {
+      transform: scale(0.97);
+    }
+    .btn-cta:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Secondary Button */
+    .btn-secondary {
+      background: transparent;
+      color: #E8515B;
+      font-weight: 600;
+      border: 2px solid #E8515B;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+    }
+    .btn-secondary:hover {
+      background: #FFF0F1;
+      transform: scale(1.02);
+    }
+    .btn-secondary:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 81, 91, 0.3);
+    }
+    .btn-secondary:active {
+      transform: scale(0.97);
+    }
+
+    /* Subtle animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Card hover */
+    .hover-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .hover-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px -4px rgba(28, 28, 46, 0.15);
+    }
+
+    /* Gradient arrow accent */
+    .accent-arrow {
+      background: linear-gradient(90deg, #E8515B, #FF8F96);
+    }
+
+    /* FAQ Accordion */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.35s ease;
+      opacity: 0;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      opacity: 1;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-icon {
+      transition: transform 0.25s ease;
+    }
+
+    /* Count-up badge pulse */
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .pulse-badge {
+      animation: pulse-soft 2s ease-in-out infinite;
+    }
+
+    /* Ticker animation */
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-track {
+      animation: ticker-scroll 20s linear infinite;
+    }
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-brand-900 antialiased">
+
+  <!-- ========== HEADER ========== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-brand-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <img src="./brand_logo/TAB_logo.png" alt="TAB 로고" class="h-9">
+      </a>
+      <nav class="hidden sm:flex items-center gap-6 text-sm text-brand-500">
+        <a href="#" class="hover:text-brand-900" style="transition: color 0.2s ease;">1인 창업가</a>
+        <a href="#process" class="hover:text-brand-900" style="transition: color 0.2s ease;">콘텐츠 구조</a>
+        <a href="#offer" class="hover:text-brand-900" style="transition: color 0.2s ease;">30일 챌린지</a>
+      </nav>
+      <a href="https://geekus.kr/actbusiness/classroom/126" target="_blank"
+         class="btn-cta px-5 py-2.5 rounded-lg text-sm">
+        30일 챌린지 신청하기
+      </a>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 bg-brand-900 text-white relative overflow-hidden">
+    <!-- 배경 장식 -->
+    <div class="absolute top-0 right-0 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl"></div>
+
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <h1 class="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+        콘텐츠 구조부터<br class="sm:hidden"> 첫 런칭까지,<br>
+        <span class="text-accent-400">30일이면 충분합니다</span>
+      </h1>
+
+      <p class="text-brand-300 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+        뭐부터 시작해야 할지 모르겠는 1인 창업가를 위한<br>
+        체계적인 실행 로드맵. 매일 한 스텝만 따라오세요.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="https://geekus.kr/actbusiness/classroom/126" target="_blank">
+          <button class="btn-cta text-lg px-10 py-4 rounded-xl w-full sm:w-auto">
+            30일 챌린지 신청하기
+          </button>
+        </a>
+        <a href="https://service-821769697956.us-west1.run.app/" target="_blank">
+          <button class="btn-secondary px-8 py-3.5 rounded-xl text-base border-white/30 text-white hover:bg-white/10">
+            무료 컨설팅 신청하기
+          </button>
+        </a>
+      </div>
+
+      <!-- 배지들 -->
+      <div class="flex flex-wrap justify-center gap-4 mt-10">
+        <div class="flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-2">
+          <svg class="w-4 h-4 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/>
+          </svg>
+          <span class="text-white/80 text-sm">보너스 3종 포함</span>
+        </div>
+        <div class="flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-2">
+          <svg class="w-4 h-4 text-accent-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+          </svg>
+          <span class="text-white/80 text-sm">무료 컨설팅 가능</span>
+        </div>
+        <div class="flex items-center gap-2 bg-accent-500/20 border border-accent-500/30 rounded-full px-4 py-2">
+          <span class="text-accent-300 text-sm font-bold">190,000원~</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TICKER ========== -->
+  <div class="bg-brand-800 py-3 overflow-hidden">
+    <div class="ticker-track flex whitespace-nowrap" style="width: max-content;">
+      <div class="flex items-center gap-6 px-3">
+        <span class="text-brand-400 text-sm font-medium">콘텐츠 구조 설계</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">타겟 정의</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">콘텐츠 제작</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">시스템화</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">런칭 페이지</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">첫 런칭 실행</span>
+        <span class="text-accent-500/50">·</span>
+      </div>
+      <div class="flex items-center gap-6 px-3">
+        <span class="text-brand-400 text-sm font-medium">콘텐츠 구조 설계</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">타겟 정의</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">콘텐츠 제작</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">시스템화</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">런칭 페이지</span>
+        <span class="text-accent-500/50">·</span>
+        <span class="text-brand-400 text-sm font-medium">첫 런칭 실행</span>
+        <span class="text-accent-500/50">·</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAIN POINTS (고통 공감) ========== -->
+  <section class="py-16 sm:py-24 px-4 bg-brand-50">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12 fade-up">
+        <h2 class="font-heading text-2xl sm:text-4xl font-extrabold text-brand-900 mb-4">
+          혹시 이런 상황 아닌가요?
+        </h2>
+        <div class="w-16 h-1 accent-arrow rounded-full mx-auto"></div>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-6 fade-up">
+        <!-- Pain 1 -->
+        <div class="hover-card bg-white rounded-2xl p-7 shadow-brand">
+          <div class="text-4xl mb-5">😰</div>
+          <h3 class="font-heading font-bold text-lg mb-2 text-brand-900">"뭐부터 해야 하지?"</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            해야 할 건 많은데 뭐부터 해야 할지 몰라서 아무것도 못 하고 있다.
+          </p>
+        </div>
+
+        <!-- Pain 2 -->
+        <div class="hover-card bg-white rounded-2xl p-7 shadow-brand">
+          <div class="text-4xl mb-5">🔄</div>
+          <h3 class="font-heading font-bold text-lg mb-2 text-brand-900">"체계가 없다"</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            이것저것 시도는 하는데, 전략 없이 그때그때 만드니까 매번 제자리.
+          </p>
+        </div>
+
+        <!-- Pain 3 -->
+        <div class="hover-card bg-white rounded-2xl p-7 shadow-brand">
+          <div class="text-4xl mb-5">⏳</div>
+          <h3 class="font-heading font-bold text-lg mb-2 text-brand-900">"계속 미루고 있다"</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            "좀 더 준비되면..." 하면서 몇 달째. 시간만 흘러간다.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-center mt-12 fade-up">
+        <span class="text-brand-500 text-base">걱정 마세요.</span><br>
+        <span class="font-semibold text-brand-900 text-lg">이건 당신의 문제가 아니라, <span class="text-accent-500">'순서'</span>의 문제입니다.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== PROCESS (어떻게 진행되나요?) ========== -->
+  <section id="process" class="py-16 sm:py-24 px-4 bg-white">
+    <div class="max-w-5xl mx-auto fade-up">
+      <div class="text-center mb-14">
+        <p class="text-accent-500 font-heading font-semibold text-sm tracking-widest uppercase mb-3">PROCESS</p>
+        <h2 class="font-heading text-2xl sm:text-4xl font-extrabold text-brand-900 mb-4">
+          어떻게 진행되나요?
+        </h2>
+        <p class="text-brand-500 text-base max-w-xl mx-auto">
+          매일 주어지는 미션만 실행하면, 30일 뒤에는 첫 런칭이 완료되어 있을 겁니다.
+        </p>
+        <div class="w-16 h-1 accent-arrow rounded-full mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-8">
+        <!-- Phase 1 -->
+        <div class="relative">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="font-display text-5xl text-accent-400/30">01</span>
+            <div class="bg-accent-50 rounded-full px-3 py-1">
+              <span class="text-accent-600 text-xs font-bold">DAY 1 ~ 10</span>
+            </div>
+          </div>
+          <h3 class="font-heading font-bold text-xl mb-3 text-brand-900">콘텐츠 구조 설계</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            나의 핵심 메시지를 정하고, 타겟을 명확히 정의합니다. 어떤 콘텐츠를 어떤 순서로 만들지 전체 구조를 완성합니다.
+          </p>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="relative">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="font-display text-5xl text-accent-400/30">02</span>
+            <div class="bg-accent-50 rounded-full px-3 py-1">
+              <span class="text-accent-600 text-xs font-bold">DAY 11 ~ 20</span>
+            </div>
+          </div>
+          <h3 class="font-heading font-bold text-xl mb-3 text-brand-900">콘텐츠 제작 & 시스템화</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            설계한 구조에 따라 실제 콘텐츠를 만듭니다. 반복 가능한 제작 시스템을 구축해 지속 가능하게 만듭니다.
+          </p>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="relative">
+          <div class="flex items-center gap-3 mb-5">
+            <span class="font-display text-5xl text-accent-400/30">03</span>
+            <div class="bg-accent-50 rounded-full px-3 py-1">
+              <span class="text-accent-600 text-xs font-bold">DAY 21 ~ 30</span>
+            </div>
+          </div>
+          <h3 class="font-heading font-bold text-xl mb-3 text-brand-900">런칭 준비 & 실행</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            런칭 페이지를 만들고, 실제로 세상에 내놓습니다. 더 이상 미루지 않고, 30일째에 첫 런칭을 완료합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BENEFITS (30일 후 변화) ========== -->
+  <section class="py-16 sm:py-24 px-4 bg-brand-50">
+    <div class="max-w-5xl mx-auto fade-up">
+      <div class="text-center mb-12">
+        <p class="text-accent-500 font-heading font-semibold text-sm tracking-widest uppercase mb-3">BENEFITS</p>
+        <h2 class="font-heading text-2xl sm:text-4xl font-extrabold text-brand-900 mb-4">
+          30일 후, 이런 변화가 생깁니다.
+        </h2>
+        <div class="w-16 h-1 accent-arrow rounded-full mx-auto"></div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <!-- Benefit 1 -->
+        <div class="hover-card bg-white rounded-2xl p-7 shadow-brand border border-brand-100">
+          <div class="w-12 h-12 bg-accent-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg mb-2 text-brand-900">체계적인 콘텐츠 구조 완성</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            더 이상 "뭐 올리지?" 고민 없이, 체계적인 콘텐츠 로드맵이 완성됩니다.
+          </p>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="hover-card bg-white rounded-2xl p-7 shadow-brand border border-brand-100">
+          <div class="w-12 h-12 bg-accent-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg mb-2 text-brand-900">매일 실행 가능한 액션 플랜</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            오늘 뭘 해야 하는지 명확합니다. 고민 대신 실행하는 하루가 됩니다.
+          </p>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="hover-card bg-white rounded-2xl p-7 shadow-brand border border-brand-100">
+          <div class="w-12 h-12 bg-accent-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg mb-2 text-brand-900">첫 런칭 경험과 자신감</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            "나도 할 수 있구나"라는 경험. 한 번 해보면, 두 번째는 훨씬 쉬워집니다.
+          </p>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="hover-card bg-white rounded-2xl p-7 shadow-brand border border-brand-100">
+          <div class="w-12 h-12 bg-accent-50 rounded-xl flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M21.015 4.356v4.992"/>
+            </svg>
+          </div>
+          <h3 class="font-heading font-bold text-lg mb-2 text-brand-900">반복 가능한 시스템</h3>
+          <p class="text-brand-500 text-sm leading-relaxed">
+            한 번 만든 구조로 계속 콘텐츠를 생산할 수 있는 시스템이 만들어집니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== OFFER (챌린지에 포함된 모든 것) ========== -->
+  <section id="offer" class="py-16 sm:py-24 px-4 bg-white">
+    <div class="max-w-3xl mx-auto fade-up">
+      <div class="text-center mb-12">
+        <p class="text-accent-500 font-heading font-semibold text-sm tracking-widest uppercase mb-3">WHAT'S INCLUDED</p>
+        <h2 class="font-heading text-2xl sm:text-4xl font-extrabold text-brand-900 mb-4">
+          챌린지에 포함된 모든 것
+        </h2>
+        <div class="w-16 h-1 accent-arrow rounded-full mx-auto"></div>
+      </div>
+
+      <!-- 핵심 프로그램 -->
+      <div class="bg-brand-900 rounded-3xl p-8 sm:p-10 mb-5 text-white">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-full">핵심 프로그램</span>
+        </div>
+        <h3 class="font-heading text-xl sm:text-2xl font-bold mb-3">30일 챌린지 프로그램</h3>
+        <p class="text-brand-300 text-sm leading-relaxed">
+          매일 명확한 미션과 함께 콘텐츠 구조 설계 → 제작 → 런칭까지 완주하는 체계적인 30일 로드맵
+        </p>
+      </div>
+
+      <!-- 보너스 -->
+      <div class="grid sm:grid-cols-3 gap-4">
+        <!-- Bonus 1 -->
+        <div class="hover-card bg-brand-50 rounded-2xl p-6 border border-brand-100">
+          <span class="bg-accent-100 text-accent-600 text-xs font-bold px-2.5 py-1 rounded-full">BONUS 1</span>
+          <h4 class="font-heading font-bold text-base mt-4 mb-2 text-brand-900">콘텐츠 기획 템플릿</h4>
+          <p class="text-brand-500 text-sm leading-relaxed">바로 복사해서 쓸 수 있는 노션 템플릿</p>
+        </div>
+
+        <!-- Bonus 2 -->
+        <div class="hover-card bg-brand-50 rounded-2xl p-6 border border-brand-100">
+          <span class="bg-accent-100 text-accent-600 text-xs font-bold px-2.5 py-1 rounded-full">BONUS 2</span>
+          <h4 class="font-heading font-bold text-base mt-4 mb-2 text-brand-900">런칭 체크리스트 PDF</h4>
+          <p class="text-brand-500 text-sm leading-relaxed">런칭 전 놓치면 안 되는 모든 항목</p>
+        </div>
+
+        <!-- Bonus 3 -->
+        <div class="hover-card bg-brand-50 rounded-2xl p-6 border border-brand-100">
+          <span class="bg-accent-100 text-accent-600 text-xs font-bold px-2.5 py-1 rounded-full">BONUS 3</span>
+          <h4 class="font-heading font-bold text-base mt-4 mb-2 text-brand-900">비공개 커뮤니티 초대</h4>
+          <p class="text-brand-500 text-sm leading-relaxed">질문 & 피드백 전용 커뮤니티</p>
+        </div>
+      </div>
+
+      <!-- 가격 카드 2개 -->
+      <div class="grid sm:grid-cols-2 gap-5 mt-12">
+        <!-- 기본 -->
+        <div class="bg-brand-50 rounded-3xl p-8 border border-brand-100 text-center">
+          <span class="bg-brand-200 text-brand-700 text-xs font-bold px-3 py-1 rounded-full">BASIC</span>
+          <h4 class="font-heading font-bold text-lg mt-4 mb-1 text-brand-900">30일 챌린지</h4>
+          <p class="text-brand-500 text-sm mb-6">셀프 실행 로드맵 + 보너스 3종</p>
+          <div class="flex items-baseline justify-center gap-1 mb-6">
+            <span class="font-heading text-4xl font-extrabold text-brand-900">190,000</span>
+            <span class="text-brand-500 text-base">원</span>
+          </div>
+          <a href="https://geekus.kr/actbusiness/classroom/126" target="_blank" class="block">
+            <button class="btn-cta text-base w-full py-3.5 rounded-xl">
+              신청하기
+            </button>
+          </a>
+        </div>
+
+        <!-- 프리미엄 -->
+        <div class="bg-brand-900 rounded-3xl p-8 text-center text-white relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-accent-500/10 rounded-full blur-2xl"></div>
+          <span class="bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-full relative z-10">PREMIUM</span>
+          <h4 class="font-heading font-bold text-lg mt-4 mb-1 relative z-10">30일 챌린지 + 1:1 코칭</h4>
+          <p class="text-brand-300 text-sm mb-6 relative z-10">셀프 실행 로드맵 + 보너스 3종 + 1:1 코칭 4회</p>
+          <div class="flex items-baseline justify-center gap-1 mb-6 relative z-10">
+            <span class="font-heading text-4xl font-extrabold text-white">590,000</span>
+            <span class="text-brand-300 text-base">원</span>
+          </div>
+          <a href="https://geekus.kr/actbusiness/classroom/126" target="_blank" class="block relative z-10">
+            <button class="btn-cta text-base w-full py-3.5 rounded-xl">
+              신청하기
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <!-- 무료 컨설팅 안내 -->
+      <div class="text-center mt-6">
+        <p class="text-brand-500 text-sm mb-3">나에게 맞는 플랜을 모르겠다면?</p>
+        <a href="https://service-821769697956.us-west1.run.app/" target="_blank"
+           class="text-accent-500 font-semibold hover:text-accent-700 inline-flex items-center gap-1"
+           style="transition: color 0.2s ease;">
+          무료 컨설팅 신청하기 →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 무료 컨설팅 안내 ========== -->
+  <section class="py-16 sm:py-20 px-4 bg-brand-50">
+    <div class="max-w-3xl mx-auto text-center fade-up">
+      <div class="bg-white rounded-3xl p-8 sm:p-12 border border-brand-100 shadow-brand">
+        <div class="w-16 h-16 bg-brand-900 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-accent-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/>
+          </svg>
+        </div>
+        <h3 class="font-heading text-2xl sm:text-3xl font-extrabold text-brand-900 mb-4">
+          본인의 상황을 진단받고 싶다면?
+        </h3>
+        <p class="text-brand-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-6">
+          지금 어떤 단계에 있는지, 어떤 플랜이 맞는지 모르겠다면 무료 컨설팅을 신청해주세요. 현재 상황에 맞는 방향을 안내해드립니다.
+        </p>
+        <a href="https://service-821769697956.us-west1.run.app/" target="_blank">
+          <button class="btn-cta text-lg px-10 py-4 rounded-xl">
+            무료 컨설팅 신청하기
+          </button>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="py-16 sm:py-24 px-4 bg-white">
+    <div class="max-w-3xl mx-auto fade-up">
+      <div class="text-center mb-12">
+        <p class="text-accent-500 font-heading font-semibold text-sm tracking-widest uppercase mb-3">FAQ</p>
+        <h2 class="font-heading text-2xl sm:text-4xl font-extrabold text-brand-900 mb-4">
+          자주 묻는 질문
+        </h2>
+        <div class="w-16 h-1 accent-arrow rounded-full mx-auto"></div>
+      </div>
+
+      <div class="space-y-3" id="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item bg-brand-50 rounded-xl border border-brand-100 overflow-hidden" onclick="toggleFaq(this)">
+          <button class="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-accent-500/30 rounded-xl">
+            <span class="font-semibold text-brand-900 pr-4">어떤 분야에서든 적용 가능한가요?</span>
+            <span class="faq-icon text-accent-500 text-2xl flex-shrink-0 font-light">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-5">
+            <p class="text-brand-600 text-sm leading-relaxed">
+              네, 온라인 코칭, 컨설팅, 강의, 전자책, 템플릿, 챌린지 등 지식 기반 상품이라면 분야에 관계없이 적용 가능합니다. 디자인, 마케팅, 건강, 교육, 재테크 등 다양한 분야의 참가자가 함께하고 있습니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item bg-brand-50 rounded-xl border border-brand-100 overflow-hidden" onclick="toggleFaq(this)">
+          <button class="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-accent-500/30 rounded-xl">
+            <span class="font-semibold text-brand-900 pr-4">하루에 얼마나 시간을 투자해야 하나요?</span>
+            <span class="faq-icon text-accent-500 text-2xl flex-shrink-0 font-light">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-5">
+            <p class="text-brand-600 text-sm leading-relaxed">
+              하루 1~2시간이면 충분합니다. 직장을 다니면서도 퇴근 후에 진행할 수 있도록 설계되어 있습니다. 주말에 몰아서 하는 것도 가능합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item bg-brand-50 rounded-xl border border-brand-100 overflow-hidden" onclick="toggleFaq(this)">
+          <button class="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-accent-500/30 rounded-xl">
+            <span class="font-semibold text-brand-900 pr-4">이미 콘텐츠를 만들고 있는데도 도움이 될까요?</span>
+            <span class="faq-icon text-accent-500 text-2xl flex-shrink-0 font-light">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-5">
+            <p class="text-brand-600 text-sm leading-relaxed">
+              물론입니다. 이미 콘텐츠를 만들고 계시다면, 기존 콘텐츠를 체계적으로 구조화하고 런칭까지 연결하는 데 큰 도움이 됩니다. 방향성을 잡고 시스템을 구축하는 과정이 핵심입니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item bg-brand-50 rounded-xl border border-brand-100 overflow-hidden" onclick="toggleFaq(this)">
+          <button class="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-accent-500/30 rounded-xl">
+            <span class="font-semibold text-brand-900 pr-4">환불은 어떻게 되나요?</span>
+            <span class="faq-icon text-accent-500 text-2xl flex-shrink-0 font-light">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-5">
+            <p class="text-brand-600 text-sm leading-relaxed">
+              디지털 콘텐츠 특성상 결제 후 환불은 어렵습니다. 신중하게 결정해주세요. 궁금한 점이 있으시면 무료 컨설팅을 먼저 신청해보시는 것을 추천드립니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item bg-brand-50 rounded-xl border border-brand-100 overflow-hidden" onclick="toggleFaq(this)">
+          <button class="w-full flex items-center justify-between px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-accent-500/30 rounded-xl">
+            <span class="font-semibold text-brand-900 pr-4">챌린지 기간이 끝나면 커뮤니티는 이용 못 하나요?</span>
+            <span class="faq-icon text-accent-500 text-2xl flex-shrink-0 font-light">+</span>
+          </button>
+          <div class="faq-answer px-6 pb-5">
+            <p class="text-brand-600 text-sm leading-relaxed">
+              아닙니다. 챌린지 참가자에게는 비공개 커뮤니티 영구 이용 권한이 제공됩니다. 챌린지 이후에도 질문하고 피드백을 주고받을 수 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FINAL CTA ========== -->
+  <section class="py-16 sm:py-24 px-4 bg-brand-900 text-white">
+    <div class="max-w-3xl mx-auto text-center fade-up">
+      <h2 class="font-heading text-2xl sm:text-4xl font-extrabold mb-4">
+        지금 시작하면,<br>
+        <span class="text-accent-400">30일 뒤가 달라집니다.</span>
+      </h2>
+      <p class="text-brand-300 text-lg mb-10 leading-relaxed max-w-xl mx-auto">
+        완벽한 준비란 없습니다. 시작하는 것 자체가 가장 큰 첫 걸음입니다.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="https://geekus.kr/actbusiness/classroom/126" target="_blank">
+          <button class="btn-cta text-lg px-12 py-4 rounded-xl">
+            30일 챌린지 신청하기
+          </button>
+        </a>
+        <a href="https://service-821769697956.us-west1.run.app/" target="_blank">
+          <button class="btn-secondary px-8 py-3.5 rounded-xl text-base border-white/30 text-white hover:bg-white/10">
+            무료 컨설팅 신청하기
+          </button>
+        </a>
+      </div>
+
+      <p class="text-brand-400 text-sm mt-4">
+        190,000원~ | 보너스 3종 포함
+      </p>
+
+      <!-- 통계 -->
+      <div class="grid grid-cols-2 gap-6 mt-14 max-w-lg mx-auto">
+        <div class="text-center">
+          <div class="flex items-baseline justify-center gap-1 mb-1">
+            <span class="font-display text-5xl text-accent-400">30</span>
+            <span class="text-brand-400 text-lg">일간의</span>
+          </div>
+          <p class="text-brand-400 text-sm">체계적 미션</p>
+          <p class="text-brand-500 text-xs mt-1">매일 명확한 액션 플랜</p>
+        </div>
+        <div class="text-center">
+          <div class="flex items-baseline justify-center gap-1 mb-1">
+            <span class="font-display text-5xl text-accent-400">3</span>
+            <span class="text-brand-400 text-lg">종</span>
+          </div>
+          <p class="text-brand-400 text-sm">보너스 자료 제공</p>
+          <p class="text-brand-500 text-xs mt-1">템플릿 + 체크리스트 + 커뮤니티</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="py-8 px-4 bg-brand-950 text-brand-400">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="./brand_logo/TAB_logo.png" alt="TAB" class="h-7 brightness-0 invert">
+        <span class="text-sm">테오의 실험 비즈니스</span>
+      </div>
+      <p class="text-sm text-brand-500">&copy; 2026 TAB. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // FAQ Toggle
+    function toggleFaq(item) {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // Scroll animation (fade-up)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
